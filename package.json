@@ -2,6 +2,7 @@
   "name": "electron-react-exam",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -10,11 +11,22 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3"
   },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "wait-on": "^5.2.0",
+    "electron": "^10.0.0",
+    "electron-builder": "^22.8.0"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "react-build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build": "npm run react-build && npm run electron-build",
+    "electron-build": "electron-builder",
+    "electron-dev": "concurrently \"cross-env BROWSER=none npm run start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "main": "public/main.js"
+  "main": "public/electron.js"
 }
